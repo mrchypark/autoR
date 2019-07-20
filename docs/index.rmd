@@ -31,13 +31,24 @@ class: center, middle, title-slide
 
 ### <https://mrchypark.github.io/autoR/>
 
-#### [[의견 및 오류 신고]](https://github.com/mrchypark/autoR/issues)
+#### [[의견 및 오류 신고]](https://github.com/mrchypark/autoR/issues) 
 
-### 박찬엽
-[`r fontawesome::fa("envelope")`][mail] [`r fontawesome::fa("facebook-square")`][fb]
+### 박찬엽 [`r fontawesome::fa("at", fill="#FF1B70")`][mail] [`r fontawesome::fa("facebook-f", fill="#FF1B70")`][fb] [`r fontawesome::fa("github", fill="#FF1B70")`][github]
 
 ### .small[2019년 7월 22일] .tiny[update 2019년 7월 22일]
 
+---
 
+## 목차
+
+1. 마우스, 키보드 자동화 - [KeyboardSimulator][KeyboardSimulator]
+1. 작업 결과 알림 - [Rpushbullet][Rpushbullet]
+1. 스케줄러 등록 및 관리 - [taskscheduleR][taskscheduleR]
+1. jobs 를 위한 스크립트 작성
+
+[taskscheduleR]: https://github.com/bnosac/taskscheduleR
+[KeyboardSimulator]: https://github.com/ChiHangChen/KeyboardSimulator
+[Rpushbullet]: https://github.com/eddelbuettel/rpushbullet
 [mail]: mailto:mrchypark@gmail.com
 [fb]: https://www.facebook.com/mrchypark
+[github]: https://github.com/mrchypark
