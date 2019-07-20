@@ -52,9 +52,307 @@ class: center, middle, title-slide
 
 1. 마우스, 키보드 자동화 - [KeyboardSimulator][KeyboardSimulator]
 1. 작업 결과 알림 - [Rpushbullet][Rpushbullet]
-1. 스케줄러 등록 및 관리 - [taskscheduleR][taskscheduleR]
 1. jobs 를 위한 스크립트 작성
+1. 스케줄러 등록 및 관리 - [taskscheduleR][taskscheduleR]
 
+---
+
+## 마우스, 키보드 자동화 - [KeyboardSimulator][KeyboardSimulator]
+
+코드로 마우스와 키보드의 동작을 조절    
+윈도우 한정 패키지
+
+
+```r
+install.packages("KeyboardSimulator")
+```
+
+---
+
+## 키보드 자동화
+
+`keydb.press()` 함수로 키보드 입력    
+대소구분 없이 소문자로 동작함    
+`+`로 연결할 수 있음
+
+
+```r
+library(KeyboardSimulator)
+keybd.press("enter")
+keybd.press("alt+f4")
+```
+
+---
+
+## 키보드 자동화
+
+`keydb.press()` 함수에 `hold` 옵션이 있음     
+`keybd.release()` 함수로 `hold`한 키를 뗄 수 있음
+
+
+```r
+keybd.press("Alt", hold = TRUE)
+keybd.press('Tab')
+keybd.release('Alt')
+```
+
+---
+
+## 키보드 자동화
+
+`keyboard_value()`는 사용할 수 있는 키 리스트를 출력
+
+
+```r
+keyboard_value()
+```
+---
+
+## 마우스 자동화
+
+마우스의 움직임을 아래 코드로 조절할 수 있음
+
+
+```r
+mouse.get_cursor()                 # 현재 마우스 위치를 출력
+mouse.click()                      # 왼쪽 클릭
+mouse.click("right")               # 오른쪽 클릭
+mouse.move(960, 540)               # 960, 540 위치로 커서 이동
+mouse.move(960, 540, duration=3)   # 3초 동안 커서 이동
+```
+
+---
+
+## 마우스 자동화
+
+키보드와 같이 `hold` 옵션과 `mouse.release()` 함수를 제공함
+
+
+```r
+mouse.click(button = "left", hold = TRUE)
+mouse.move(960, 540)
+mouse.release()
+```
+
+---
+
+## 클립보드 상호작용 - [clipr][clipr]
+
+`Ctrl+c`, `Ctrl+v` 하는 값을 R과 함께 사용할 수 있게 해주는 패키지
+
+
+```r
+install.packages("clipr")
+```
+
+```r
+library(clipr)
+dr_clipr()
+```
+
+```
+## clipr has read/write access to the system clipboard!
+```
+
+---
+
+## 클립보드 상호작용 - [clipr][clipr]
+
+
+```r
+clear_clip()
+write_clip("hello")
+read_clip()
+```
+
+```
+## [1] "hello"
+```
+
+```r
+write_clip(c("hello","world!"))
+read_clip()
+```
+
+```
+## [1] "hello"  "world!"
+```
+
+---
+
+## 작업 결과 알림 - [Rpushbullet][Rpushbullet]
+
+[pushbullet][pushbullet]을 이용해 알림을 받을 수 있음
+
+![](https://user-images.githubusercontent.com/6179259/61582942-4f7e3680-ab6c-11e9-842d-77138eb9db1f.png)
+
+---
+
+class: middle
+
+![](https://user-images.githubusercontent.com/6179259/61582949-86ece300-ab6c-11e9-9dc7-ebb5a7db90a0.png)
+
+---
+
+## 패키지 설치
+
+
+---
+
+## 회원가입 진행
+
+구글 아이디와 페이스북 아이디로 진행할 수 있음
+
+![](https://user-images.githubusercontent.com/6179259/61583038-72f5b100-ab6d-11e9-83ea-452cc6030a89.png)
+
+---
+
+## api key 생성
+
+`Setting` 탭을 클릭하고 Access Tokens 부분에 Create Access Token 클릭
+
+![](https://user-images.githubusercontent.com/6179259/61583058-d5e74800-ab6d-11e9-9c63-06405e3fa8a0.png)
+
+---
+
+## api key 생성
+
+다시는 볼 수 없는 비밀키가 생김
+
+![]( https://user-images.githubusercontent.com/6179259/61583080-18a92000-ab6e-11e9-8abf-72e96210adc9.png)
+
+---
+
+## api key 등록
+
+`pbSetup()` 함수를 이용해서 api key 등록
+
+
+```r
+library(RPushbullet)
+pbSetup("XXXXXXXXXXXXXXXXXXXXXXXXXX")
+```
+
+`pbValidateConf()` 함수로 동작하는 키가 잘 등록되었는지 확인
+
+
+```r
+library(RPushbullet)
+pbValidateConf()
+```
+
+```
+## No configuration specified.  Assuming user meant: ~/.rpushbullet.json
+```
+
+```
+## key is VALID
+```
+
+```
+## device ujAFTeGzAHIsjxmBRVc0qq is VALID
+```
+
+```
+## device ujAFTeGzAHIsjCxUGFi43E is VALID
+```
+
+```
+## device ujAFTeGzAHIsjAiVsKnSTs is VALID
+```
+
+```
+## [1] TRUE
+```
+
+---
+
+## post 보내기
+
+post의 종류는 `note`, `link`, `file`로 동작합니다.
+
+
+```r
+# note 보내기
+pbPost(type = "note", title = "안녕하세요", body = "본문입니다.")
+
+# link 보내기
+pbPost(type = "link", url = "https://mrchypark.github.io/")
+
+# file 보내기
+pbPost(type = "file", url = "example.txt")
+```
+
+---
+
+## 보낸 post 확인하기
+ 
+`pbGetPosts()` 함수는 그동안 보낸 post를 확인할 수 있음
+ 
+
+```r
+suppressMessages(library(dplyr))
+pbGetPosts(limit = 3) %&gt;% 
+  select(type, created, url, title, body)
+```
+
+```
+##   type    created                          url      title        body
+## 1 link 1563651316 https://mrchypark.github.io/       &lt;NA&gt;        &lt;NA&gt;
+## 2 note 1563651316                         &lt;NA&gt; 안녕하세요 본문입니다.
+## 3 note 1563651295                         &lt;NA&gt; 안녕하세요 본문입니다.
+```
+
+---
+
+## 스케줄러 - [taskscheduleR][taskscheduleR]
+
+![](https://github.com/bnosac/taskscheduleR/raw/master/vignettes/taskscheduleR-rstudioaddin.png)
+
+---
+
+## 스케줄러 
+
+등록한 시간에 동작을 수행하도록 등록
+
+
+```r
+# mac이나 linux라면 cronR 설치
+install.packages("taskscheduleR")
+```
+
+---
+
+## jobs 를 위한 스크립트 작성
+
+`try()` 함수는 에러가 발생하는 것은 조절 할 수 있게 해줌.
+
+
+```r
+res &lt;- try(1+"1", silent = T)
+res
+```
+
+```
+## [1] "Error in 1 + \"1\" : non-numeric argument to binary operator\n"
+## attr(,"class")
+## [1] "try-error"
+## attr(,"condition")
+## &lt;simpleError in 1 + "1": non-numeric argument to binary operator&gt;
+```
+
+```r
+class(res)
+```
+
+```
+## [1] "try-error"
+```
+
+---
+
+[pushbullet]: https://www.pushbullet.com/
+[clipr]: https://github.com/mdlincoln/clipr
 [taskscheduleR]: https://github.com/bnosac/taskscheduleR
 [KeyboardSimulator]: https://github.com/ChiHangChen/KeyboardSimulator
 [Rpushbullet]: https://github.com/eddelbuettel/rpushbullet
