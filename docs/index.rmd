@@ -43,7 +43,6 @@ class: center, middle, title-slide
 
 1. 마우스, 키보드 자동화 - [KeyboardSimulator][KeyboardSimulator]
 1. 작업 결과 알림 - [Rpushbullet][Rpushbullet]
-1. jobs 를 위한 스크립트 작성
 1. 스케줄러 등록 및 관리 - [taskscheduleR][taskscheduleR]
 
 ---
@@ -88,10 +87,10 @@ keybd.release('Alt')
 
 ## 키보드 자동화
 
-`keyboard_value()`는 사용할 수 있는 키 리스트를 출력
+`keyboard_value`는 사용할 수 있는 키 리스트를 출력
 
 ```{r eval=F}
-keyboard_value()
+keyboard_value
 ```
 ---
 
@@ -163,9 +162,11 @@ class: middle
 
 ## 패키지 설치
 
+`pbGetPosts()` 함수를 사용하기 위해서는 아직 개발버전을 사용해야 함.
+
 ```{r eval=F}
-
-
+install.packages("RPushbullet")
+remotes::install_github("eddelbuettel/rpushbullet")
 ```
 ---
 
@@ -234,8 +235,8 @@ pbPost(type = "file", url = "example.txt")
  
 ```{r}
 suppressMessages(library(dplyr))
-pbGetPosts(limit = 3) %>% 
-  select(type, created, url, title, body)
+pbGetPosts(limit = 4) %>% 
+  select(type, created, title, body)
 ```
 
 ---
@@ -257,13 +258,19 @@ install.packages("taskscheduleR")
 
 ---
 
-## 절대 경로와 상대 경로
+## 작업 위치와 경로
 
-스케줄러가 등록해주는 
+1. 절대 경로 : "C://"으로 시작하는 전체의 경로를 모두 작성하는 것을 뜻함
+1. 상대 경로 : `.`, `~` 등 특정한 위치를 나타내는 글자를 이용해서 경로를 표시
+1. 작업 폴더 : `working diretory`의 번역이며 스크립트 파일이 실행되는 위치를 뜻함
+
+- `.` : 현재 폴더
+- `~` : HOME 폴더. 각 os, 유저 상황에 따라 유동적임. 윈도우 사용자 + R의 경우보통 문서 폴더를 뜻함.
+
 
 ---
 
-## jobs 를 위한 스크립트 작성
+## `try()` 함수로 상태 확인
 
 `try()` 함수는 에러가 발생하는 것은 조절 할 수 있게 해줌.
 
@@ -273,7 +280,6 @@ res
 class(res)
 ```
 
----
 
 [pushbullet]: https://www.pushbullet.com/
 [clipr]: https://github.com/mdlincoln/clipr
