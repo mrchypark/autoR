@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
-    <title>업무 자동화를 위한 R 더하기</title>
+    <title>R로 하는 업무 자동화</title>
     <meta charset="utf-8" />
     <meta name="author" content="박찬엽" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
@@ -297,16 +297,18 @@ pbPost(type = "file", url = "example.txt")
 
 ```r
 suppressMessages(library(dplyr))
-pbGetPosts(limit = 4) %&gt;% 
-  select(type, created, title, body)
+pbGetPosts(limit = 4)
 ```
 
 ```
-##   type    created      title        body
-## 1 note 1563727395 안녕ㅎ세요        &lt;NA&gt;
-## 2 note 1563651186 안녕하세요 본문입니다.
-## 3 note 1563651295 안녕하세요 본문입니다.
-## 4 note 1563651233 안녕하세요 본문입니다.
+##   active                   iden    created   modified type dismissed
+## 1   TRUE ujAFTeGzAHIsjwJHwr1g3U 1563727395 1563727396 note     FALSE
+##   direction sender_iden        sender_email sender_email_normalized
+## 1      self ujAFTeGzAHI mrchypark@gmail.com     mrchypark@gmail.com
+##     sender_name receiver_iden      receiver_email
+## 1 chan yub park   ujAFTeGzAHI mrchypark@gmail.com
+##   receiver_email_normalized      title
+## 1       mrchypark@gmail.com 안녕ㅎ세요
 ```
 
 ---
