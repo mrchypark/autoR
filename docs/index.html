@@ -179,6 +179,47 @@ read_clip()
 
 ---
 
+## 비밀 번호를 저장하고 사용하기 - [keyring][keyring]
+
+1. `key_set()` 비밀 번호의 이름과 함께 입력하면, 비밀번호를 묻는 창이 뜨고, 등록할 수 있음
+1. `key_get()` 함수를 이용해 비밀 번호의 이름으로 비밀번호를 가져옴
+
+
+```r
+library(keyring)
+
+key_set("key_name")
+
+key_get("key_name")
+```
+
+---
+
+## 함께 쓰면 좋은 함수
+
+
+```r
+# 1초 동안 대기
+Sys.sleep(1)
+
+# 뒤에 명령을 4번 반복
+replicate(4, keybd.press("enter"))
+
+# 경로로 지정하여 프로그램 실행
+system2("C:/Program Files (x86)/Google/Chrome/chrome.exe")
+
+# 조건이 만족하는 동안은 계속 실행
+while (condition) {
+  ## 실행할 코드
+}
+```
+
+---
+
+## while 문 설명
+
+---
+
 ## 작업 결과 알림 - [Rpushbullet][Rpushbullet]
 
 [pushbullet][pushbullet]을 이용해 알림을 받을 수 있음
@@ -302,7 +343,7 @@ pbGetPosts(limit = 4)
 
 ```
 ##   active                   iden    created   modified type dismissed
-## 1   TRUE ujAFTeGzAHIsjwJHwr1g3U 1563727395 1563727396 note     FALSE
+## 1   TRUE ujAFTeGzAHIsjwJHwr1g3U 1563727395 1563767215 note      TRUE
 ##   direction sender_iden        sender_email sender_email_normalized
 ## 1      self ujAFTeGzAHI mrchypark@gmail.com     mrchypark@gmail.com
 ##     sender_name receiver_iden      receiver_email
@@ -369,7 +410,7 @@ class(res)
 ## [1] "try-error"
 ```
 
-
+[keyring]: https://github.com/r-lib/keyring
 [pushbullet]: https://www.pushbullet.com/
 [clipr]: https://github.com/mdlincoln/clipr
 [taskscheduleR]: https://github.com/bnosac/taskscheduleR
