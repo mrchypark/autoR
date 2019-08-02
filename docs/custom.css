@@ -5,6 +5,11 @@
 html, body, h1, h2, h3, h4, h5, h6, li, p {font-family:'Spoqa Han Sans';
 }
 
+.remark-slide-content {
+  border:0;
+  margin:0;
+}
+
 .pen-b { 
   font-family: 'Nanum Brush Script', cursive;
   font-size: 130%;
